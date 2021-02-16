@@ -15,5 +15,9 @@ export class NotificationService {
     return this.http.post<any>((this.baseUrl + 'api/notification/login'), { username, password })
   }
 
+  public checkResponse(): Observable<User> {
+    return this.http.get<any>(('http://localhost:63200/api/notification/consume'))
+  }
+
 
 }

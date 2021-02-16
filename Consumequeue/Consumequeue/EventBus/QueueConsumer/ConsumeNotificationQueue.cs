@@ -10,6 +10,7 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Consumequeue.APIController;
 
 namespace QueueConsumer
 {
@@ -19,6 +20,7 @@ namespace QueueConsumer
         private readonly IConnection _connection;
         private IModel _channel;
         private readonly IQueueProvider _queueProvider;
+        //private readonly NotificationAPIcontroller notificationAPIcontroller;
         public IConfiguration Configuration { get; }
 
         //private readonly AppLogService _appLogService;
@@ -30,7 +32,7 @@ namespace QueueConsumer
             _connection = _conn;
             Configuration = configuration;
             _queueProvider = queueProvider;
-
+            //notificationAPIcontroller.Login();
             InitRabbitMQ();
         }
 

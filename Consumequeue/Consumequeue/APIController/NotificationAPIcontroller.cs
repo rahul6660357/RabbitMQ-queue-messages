@@ -29,7 +29,7 @@ namespace Consumequeue.APIController
             conn = _conn;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("consume")]
         public IActionResult Login()
         {

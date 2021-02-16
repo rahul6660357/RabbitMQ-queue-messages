@@ -7,9 +7,13 @@ import { NotificationService } from 'src/services/notification.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  private response;
   title = 'PushNotificationApp';
   constructor(
     private _notification: NotificationService) { 
+  }
+  ngOnInit(){
+    
   }
  private user:any;
  username;
@@ -17,8 +21,16 @@ export class AppComponent {
   login() {
     this._notification.loginsuccess(this.username, this.password).subscribe(data => {
       this.user=data;
+      this.checkResponses();
       alert(this.user.messages);
     });
 
   }
+  checkResponses() {
+    this._notification.checkResponse().subscribe(data => {
+      this.response=data;
+    });
+
+  }
+
 }

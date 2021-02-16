@@ -40,7 +40,7 @@ namespace notification.APIController
                 dm.checkresult = _notification.Authenticate(dmm.username, dmm.password);
                 if(dm.checkresult==false)
                 { 
-                    using (var channel = conn.CreateModel())
+                    /*using (var channel = conn.CreateModel())
                     {
                         channel.QueueDeclare(queue: "notification",
                                              durable: false,
@@ -55,38 +55,8 @@ namespace notification.APIController
                                              routingKey: "notification",
                                              basicProperties: null,
                                                  body: body);
-                    }
-                    using (var rabbitMqChannel = conn.CreateModel())
-                    {
-                        rabbitMqChannel.QueueDeclare(queue: "notification",
-                           durable: false,
-                           exclusive: false,
-                           autoDelete: false,
-                           arguments: null);
-
-                        rabbitMqChannel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-                        int messageCount = Convert.ToInt16(rabbitMqChannel.MessageCount("notification"));
-                        Console.WriteLine(" Listening to the queue. This channels has {0} messages on the queue", messageCount);
-
-                        var consumer = new EventingBasicConsumer(rabbitMqChannel);
-                        consumer.Received += (model, ea) =>
-                        {
-                            var body2 = ea.Body.ToArray(); 
-                            var message = Encoding.UTF8.GetString(body2);
-                            dm.messages= Encoding.UTF8.GetString(body2);
-                            Console.WriteLine("error message : " + message);
-                            rabbitMqChannel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-                            Thread.Sleep(1000);
-                        };
-                        rabbitMqChannel.BasicConsume(queue: "notification",
-                                             autoAck: false,
-                                             consumer: consumer);
-
-                        Thread.Sleep(1000 * messageCount);
-                        Console.WriteLine(" Connection closed, no more messages.");
-                       
-                    }
+                    }*/
+                    dmm.messages = "Your Data has not been submitted successfully.";
                 }
                 else
                 {
@@ -106,38 +76,9 @@ namespace notification.APIController
                                              basicProperties: null,
                                                  body: body);
                     }
-                    using (var rabbitMqChannel = conn.CreateModel())
-                    {
-                        rabbitMqChannel.QueueDeclare(queue: "notification",
-                           durable: false,
-                           exclusive: false,
-                           autoDelete: false,
-                           arguments: null);
-
-                        rabbitMqChannel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-                        int messageCount = Convert.ToInt16(rabbitMqChannel.MessageCount("notification"));
-                        Console.WriteLine(" Listening to the queue. This channels has {0} messages on the queue", messageCount);
-
-                        var consumer = new EventingBasicConsumer(rabbitMqChannel);
-                        consumer.Received += (model, ea) =>
-                        {
-                            var body2 = ea.Body.ToArray();
-                            var message = Encoding.UTF8.GetString(body2);
-                            dm.messages= Encoding.UTF8.GetString(body2);
-                            Console.WriteLine("success message : " + message);
-                            rabbitMqChannel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-                            Thread.Sleep(1000);
-                        };
-                        rabbitMqChannel.BasicConsume(queue: "notification",
-                                             autoAck: false,
-                                             consumer: consumer);
-
-                        Thread.Sleep(1000 * messageCount);
-                        Console.WriteLine(" Connection closed, no more messages.");
-                     
-                    }
+                    
                 }
+                dmm.messages = "Your Data has been submitted.You will be notified of the response in 1 minute";
                 dm.statusCode = System.Net.HttpStatusCode.OK;
             }
             catch(Exception e)
