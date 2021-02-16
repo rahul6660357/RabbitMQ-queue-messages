@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+   notification:
+    container_name: Notificationservice
+    build:
+      context: ./notification/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:80
