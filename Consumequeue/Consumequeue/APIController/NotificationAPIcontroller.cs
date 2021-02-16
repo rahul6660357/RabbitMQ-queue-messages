@@ -56,7 +56,7 @@ namespace Consumequeue.APIController
                         {
                             var body2 = ea.Body.ToArray(); 
                             var message = Encoding.UTF8.GetString(body2);
-                            dm.messages= Encoding.UTF8.GetString(body2);
+                          //  dm.messages= Encoding.UTF8.GetString(body2);
                             Console.WriteLine("error message : " + message);
                             rabbitMqChannel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                             Thread.Sleep(1000);
@@ -69,6 +69,7 @@ namespace Consumequeue.APIController
                         Console.WriteLine(" Connection closed, no more messages.");
                        
                     }
+                dm.messages = "your request is completed";
                
                 dm.statusCode = System.Net.HttpStatusCode.OK;
             }
@@ -76,8 +77,9 @@ namespace Consumequeue.APIController
             {
                 dm.statusCode = System.Net.HttpStatusCode.BadRequest;
             }
-            Console.WriteLine(dm);
 
+
+            Thread.Sleep(5000);
             return new ObjectResult(dm);
         }
        

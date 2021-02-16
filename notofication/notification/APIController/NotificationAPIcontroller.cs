@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace notification.APIController
 {
-    [Route("api/notification")]
+    [Route("api/notificationn")]
     [ApiController]
 
     public class NotificationAPIcontroller : Controller
@@ -56,7 +56,7 @@ namespace notification.APIController
                                              basicProperties: null,
                                                  body: body);
                     }*/
-                    dmm.messages = "Your Data has not been submitted successfully.";
+                    dm.messages = "Your Data has not been submitted successfully.";
                 }
                 else
                 {
@@ -78,7 +78,7 @@ namespace notification.APIController
                     }
                     
                 }
-                dmm.messages = "Your Data has been submitted.You will be notified of the response in 1 minute";
+                dm.messages = "Your Data has been submitted.You will be notified of the response in 1 minute";
                 dm.statusCode = System.Net.HttpStatusCode.OK;
             }
             catch(Exception e)

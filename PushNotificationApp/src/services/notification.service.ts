@@ -12,7 +12,7 @@ export class NotificationService {
 
   private baseUrl= 'http://localhost:63300/';
   public loginsuccess(username, password): Observable<User> {
-    return this.http.post<any>((this.baseUrl + 'api/notification/login'), { username, password })
+    return this.http.post<any>((this.baseUrl + 'api/notificationn/login'), { username, password })
   }
 
   public checkResponse(): Observable<User> {

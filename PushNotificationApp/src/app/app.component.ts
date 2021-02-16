@@ -21,14 +21,17 @@ export class AppComponent {
   login() {
     this._notification.loginsuccess(this.username, this.password).subscribe(data => {
       this.user=data;
-      this.checkResponses();
+      console.log(this.user);
       alert(this.user.messages);
+      this.checkResponses();
+      
     });
 
   }
   checkResponses() {
     this._notification.checkResponse().subscribe(data => {
       this.response=data;
+      alert(this.response.messages);
     });
 
   }
