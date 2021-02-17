@@ -39,12 +39,17 @@ namespace Consumequeue
                 .AddCheck<MessageQueueHealth>("Message_Queue_health");
             services.AddCors(options =>
             {
-                options.AddPolicy("EnableCORS", builder =>
+                options.AddPolicy("CorsPolicy", builder => builder
+       .WithOrigins("http://localhost:4200")
+       .AllowAnyMethod()
+       .AllowAnyHeader()
+       .AllowCredentials());
+               /* options.AddPolicy("EnableCORS", builder =>
                 {
                     builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod().Build();
-                });
+                });*/
             });
             services.AddSignalR();
             services.AddSingleton(serviceProvider =>
@@ -95,7 +100,7 @@ namespace Consumequeue
             app.UseAuthorization();
 
             app.UseStatusCodePages("text/plain", "status code: {0}");
-            app.UseCors("EnableCORS");
+            app.UseCors("CorsPolicy");
 
             app.Use(async (context, next) =>
             {

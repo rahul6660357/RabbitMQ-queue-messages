@@ -17,9 +17,7 @@ export class AppComponent {
     private http: HttpClient) { 
   }
   ngOnInit(){
-    this.signalRService.startConnection();
-    //this.signalRService.addTransferChartDataListener();   
-    this.startHttpRequest();
+   
   }
  private user:any;
  username;
@@ -29,22 +27,18 @@ export class AppComponent {
       this.user=data;
       console.log(this.user);
       alert(this.user.messages);
-     // this.checkResponses();
+       this.signalRService.startConnection();
+      this.signalRService.addLoginListener();   
+      this.startHttpRequest();
       
     });
 
   }
-  // checkResponses() {
-  //   this._notification.checkResponse().subscribe(data => {
-  //     this.response=data;
-  //     alert(this.response.messages);
-  //   });
 
-  //}
   private startHttpRequest = () => {
     this.http.get('http://localhost:63200/api/notification/consume')
-      .subscribe(res => {
-        console.log(res);
+      .subscribe(data => {
+        console.log(data);
       })
   }
 

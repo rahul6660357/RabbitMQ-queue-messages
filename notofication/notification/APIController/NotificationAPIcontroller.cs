@@ -57,6 +57,7 @@ namespace notification.APIController
                                                  body: body);
                     }*/
                     dm.messages = "Your Data has not been submitted successfully.";
+                    dm.statusCode = System.Net.HttpStatusCode.OK;
                 }
                 else
                 {
@@ -76,10 +77,10 @@ namespace notification.APIController
                                              basicProperties: null,
                                                  body: body);
                     }
-                    
+                    dm.messages = "Your Data has been submitted.You will be notified of the response in 1 minute";
+                    dm.statusCode = System.Net.HttpStatusCode.OK;
                 }
-                dm.messages = "Your Data has been submitted.You will be notified of the response in 1 minute";
-                dm.statusCode = System.Net.HttpStatusCode.OK;
+                
             }
             catch(Exception e)
             {
