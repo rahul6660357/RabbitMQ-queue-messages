@@ -17,6 +17,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Consumequeue.ViewModels;
 
 namespace Consumequeue
 {
@@ -45,7 +46,7 @@ namespace Consumequeue
                     .AllowAnyMethod().Build();
                 });
             });
-
+            services.AddSignalR();
             services.AddSingleton(serviceProvider =>
             {
                 IConnection _confactory;
@@ -110,6 +111,7 @@ namespace Consumequeue
                 {
                     ResponseWriter = WriteResponse
                 });
+                endpoints.MapHub<DataViewModel>("/consume");
             });
         }
 

@@ -8,8 +8,7 @@ namespace Consumequeue.ViewModels
 {
     public class ResultViewModel
     {
-        public HttpStatusCode statusCode { get; set; }
-        public string message { get; set; }
+       
 
     }
 }
